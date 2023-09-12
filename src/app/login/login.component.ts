@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServiceService } from '../Services/login-service.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -15,16 +16,7 @@ export class LoginComponent implements OnInit {
   result:any;
 
   ngOnInit(): void {
-    let user = localStorage.getItem("user");
-    console.log(user);
-    if (user) {
-      const userObject = JSON.parse(user); 
-      if (userObject && userObject.role === "Staff") {
-        this.route.navigate(['/staff']);
-      } else if (userObject && userObject.role === "Manager")  {
-        this.route.navigate(['/manager']);
-      }
-}
+    
   }
 
   login(loginForm: NgForm) {
@@ -35,6 +27,9 @@ export class LoginComponent implements OnInit {
       } else {
         this.route.navigate(['/manager']);
       }
+    }, error => {
+      alert("Login Failer, Retry");
+      console.log(error);
     });
   }
 

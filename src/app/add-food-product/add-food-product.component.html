@@ -1,0 +1,128 @@
+<app-nav-manager></app-nav-manager>
+<div class="container">
+  <H3>Food Product</H3>
+  <hr />
+  <div class="regForm">
+    <div class="row">
+      <div class="col-6">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+          <!-- Name Field -->
+          <div class="mb-3">
+            <div class="row">
+              <label for="name">Product Name</label>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              formControlName="name"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('name')?.invalid &&
+                registrationForm.get('name')?.touched
+              "
+              class="text-danger"
+            >
+              Product Name is required
+            </div>
+          </div>
+
+          <!-- Type Field -->
+          <div class="mb-3">
+            <div class="row">
+              <label for="type">Product Type</label>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              name="type"
+              formControlName="type"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('type')?.invalid &&
+                registrationForm.get('type')?.touched
+              "
+              class="text-danger"
+            >
+              Product Type is required
+            </div>
+          </div>
+
+          <!-- About Field -->
+          <div class="mb-3">
+            <div class="row">
+              <label for="about">About Product</label>
+            </div>
+            <textarea
+              class="form-control"
+              id="about"
+              name="about"
+              formControlName="about"
+            ></textarea>
+            <div
+              *ngIf="
+                registrationForm.get('about')?.invalid &&
+                registrationForm.get('about')?.touched
+              "
+              class="text-danger"
+            >
+              About Product is required
+            </div>
+          </div>
+
+          <!-- Availability Field -->
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="availability"
+                name="availability"
+                formControlName="availability"
+              />
+              <label class="form-check-label" for="availability"
+                >Available</label
+              >
+            </div>
+          </div>
+
+          <!-- Price Field -->
+          <div class="mb-3">
+            <div class="row">
+              <label for="price">Price</label>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="price"
+              formControlName="price"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('price')?.invalid &&
+                registrationForm.get('price')?.touched
+              "
+              class="text-danger"
+            >
+              Price is required and must be a valid number
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="registrationForm.invalid"
+          >
+            Save Product
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

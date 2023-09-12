@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffServiceService } from '../Services/staff-service.service';
 import { Router } from '@angular/router';
+import { ManagerServicesService } from '../Services/manager-services.service';
 
 @Component({
   selector: 'app-branch-manager-dashboard',
@@ -14,9 +15,12 @@ export class BranchManagerDashboardComponent implements OnInit {
 
 
 
-  constructor(private staffService: StaffServiceService, private route:Router) {
-    staffService.getStaffInfo().subscribe(res => {
+  constructor(private managerServices: ManagerServicesService, private route:Router) {
+    managerServices.getStaffInfo().subscribe(res => {
       this.staffList = res;
+    }, err => {
+      alert("Server Error");
+      console.log(err);
     })
   }
 
@@ -32,18 +36,22 @@ export class BranchManagerDashboardComponent implements OnInit {
 
 
   getStaff() {
-    this.staffService.getStaffInfo().subscribe(res => {
+    this.managerServices.getStaffInfo().subscribe(res => {
       this.staffList = res;
+    }, err => {
+      alert("Server Error");
+      console.log(err);
     })
   }
 
   
   
   delete(id: any) {
-    this.staffService.deleteStaff(id).subscribe(res => {
-      console.log(res);
+    this.managerServices.deleteStaff(id).subscribe(res => {
       this.getStaff();
       this.deleteToast = true;
+    }, err => {
+      alert("Error occured");
     });
     const self = this;
     setTimeout(function (deleteToast:any ) {

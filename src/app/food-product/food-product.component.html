@@ -1,14 +1,18 @@
+<app-nav-manager></app-nav-manager>
 <div>
-  <app-nav-manager></app-nav-manager>
   <div class="container">
     <div class="row" style="margin-top: 10px">
       <div class="col-6">
-        <h4>STAFF DETAILS</h4>
+        <h4>FOOD PRODUCT DETAILS</h4>
       </div>
 
       <div class="col-6 d-flex flex-column align-items-end">
-        <button routerLink="/addStaff" type="button" class="btn btn-primary">
-          Create new Staff Member
+        <button
+          routerLink="/addfoodproduct"
+          type="button"
+          class="btn btn-primary"
+        >
+          Create new Food Product
         </button>
       </div>
     </div>
@@ -17,33 +21,42 @@
       <table class="table" style="margin-top: 10px">
         <thead class="table-dark">
           <tr>
-            <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Email</th>
+            <th scope="col">Type</th>
+            <th scope="col">About</th>
+            <th scope="col">Price</th>
+            <th scope="col">Availability</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let d of staffList?.data">
-            <th>{{ d?.id }}</th>
-            <td>{{ d?.name }}</td>
-            <td>{{ d?.email }}</td>
+          <tr *ngFor="let d of FoodProductList">
+            <th>{{ d?.name }}</th>
+            <td>{{ d?.type }}</td>
+            <td>{{ d?.about }}</td>
+            <td>$ {{ d?.price }}</td>
+            <td>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  [checked]="d.availability"
+                  id="flexSwitchCheckDefault"
+                />
+              </div>
+            </td>
             <td>
               <div>
                 <button
                   type="button"
                   style="margin-right: 10px"
                   class="btn btn-success"
-                  [routerLink]="['/edit', d?.id]"
+                  [routerLink]="['/edit']"
                 >
                   Edit
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="delete(d?.id)"
-                  id="liveToastBtn"
-                >
+                <button type="button" class="btn btn-danger" id="liveToastBtn">
                   Delete
                 </button>
               </div>
@@ -55,7 +68,7 @@
     </div>
   </div>
 </div>
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<!-- <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div
     id="liveToast"
     class="toast align-items-center text-bg-success border-0 fade show"
@@ -75,4 +88,4 @@
       ></button>
     </div>
   </div>
-</div>
+</div> -->

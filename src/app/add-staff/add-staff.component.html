@@ -1,61 +1,134 @@
+<app-nav-manager></app-nav-manager>
 <div class="container">
-  <H3>Add Staff Members</H3>
+  <H3>Staff Members</H3>
   <hr />
-  <br />
   <div class="regForm">
     <div class="row">
       <div class="col-6">
-        <form>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+          <!-- Name Field -->
           <div class="mb-3">
             <div class="row">
-              <label for="name">Enter Name: </label>
+              <label for="name">Enter Name</label>
             </div>
-            <input type="text" class="form-control" id="name" name="name" />
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              formControlName="name"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('name')?.invalid &&
+                registrationForm.get('name')?.touched
+              "
+              class="text-danger"
+            >
+              Name is required
+            </div>
           </div>
 
+          <!-- Email Field -->
           <div class="mb-3">
             <div class="row">
-              <label for="name">Enter Email: </label>
+              <label for="email">Enter Email</label>
             </div>
-            <input type="email" class="form-control" id="email" name="email" />
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('email')?.invalid &&
+                registrationForm.get('email')?.touched
+              "
+              class="text-danger"
+            >
+              Email is required and must be a valid email address
+            </div>
           </div>
 
+          <!-- Password Field -->
           <div class="mb-3">
             <div class="row">
-              <label for="name">Enter Password: </label>
+              <label for="password">Enter Password</label>
             </div>
             <input
               type="password"
               class="form-control"
               id="password"
               name="password"
+              formControlName="password"
             />
+            <div
+              *ngIf="
+                registrationForm.get('password')?.invalid &&
+                registrationForm.get('password')?.touched
+              "
+              class="text-danger"
+            >
+              Password is required and must be at least 6 characters long
+            </div>
           </div>
 
+          <!-- Confirm Password Field -->
           <div class="mb-3">
             <div class="row">
-              <label for="name">Confirm Password: </label>
+              <label for="cpassword">Confirm Password</label>
             </div>
             <input
               type="password"
               class="form-control"
               id="cpassword"
               name="cpassword"
+              formControlName="cpassword"
             />
-          </div>
-
-          <div class="mb-3">
-            <div class="row">
-              <label for="name">Enter Branch: </label>
+            <div
+              *ngIf="
+                registrationForm.get('cpassword')?.invalid &&
+                registrationForm.get('cpassword')?.hasError('customError')
+              "
+              class="text-danger"
+            >
+              Passwords must match
             </div>
-            <input type="text" class="form-control" id="branch" name="branch" />
           </div>
 
-          <div class="mb-3">
-            <input type="checkbox" id="role" name="role" /> Add as a Staff
-            Member
-          </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <!-- Branch Field -->
+          <!-- <div class="mb-3">
+            <div class="row">
+              <label for="branch">Enter Branch</label>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="branch"
+              name="branch"
+              formControlName="branch"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('branch')?.invalid &&
+                registrationForm.get('branch')?.touched
+              "
+              class="text-danger"
+            >
+              Branch is required
+            </div>
+          </div> -->
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="registrationForm.invalid"
+          >
+            Register
+          </button>
         </form>
       </div>
     </div>

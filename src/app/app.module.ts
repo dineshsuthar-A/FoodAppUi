@@ -7,13 +7,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BranchManagerDashboardComponent } from './branch-manager-dashboard/branch-manager-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddStaffComponent } from './add-staff/add-staff.component';
+import { FoodProductComponent } from './food-product/food-product.component';
+import { NavManagerComponent } from './nav-manager/nav-manager.component';
+import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BranchManagerDashboardComponent,
     LoginComponent,
-    StaffComponent
+    StaffComponent,
+    AddStaffComponent,
+    FoodProductComponent,
+    NavManagerComponent,
+    AddFoodProductComponent
   ],
   imports: [
     BrowserModule,
