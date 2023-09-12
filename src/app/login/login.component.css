@@ -1,0 +1,61 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /* background-color: #b8bdc0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    width: 400px;
+    border: 3px solid #ccc;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 20px 40px 60px rgba(93, 164, 192, 0.1);
+    box-shadow: 10px 10px 5px lightblue;
+
+}
+
+
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #70b6e4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
