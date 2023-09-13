@@ -9,7 +9,7 @@ import { StaffServiceService } from './../Services/staff-service.service';
 })
 export class StaffComponent implements OnInit {
 
-  searchOrder: any;
+  searchOrder: string;
   confirmed = 'confirmed';
   delivered = 'delivered';
   progress = 'progress';
@@ -18,7 +18,9 @@ export class StaffComponent implements OnInit {
   filteredOrders: any[] = [];
   foodOrderId: Number = 0;
 
-  constructor(private router: Router,private staffService: StaffServiceService) { }
+  constructor(private router: Router, private staffService: StaffServiceService) { 
+    this.searchOrder = "";
+  }
 
   allOrders: any;
   staff = JSON.parse(localStorage.getItem('user')!);
@@ -26,7 +28,7 @@ export class StaffComponent implements OnInit {
   ngOnInit(): void {
     this.staffService.getAllFoodOrder(this.staff.id).subscribe((data) => {
       this.allOrders = data;
-      this.searchOrder = this.allOrders.data; // Initialize filteredOrders
+      this.filteredOrders = this.allOrders?.data;
       console.log('List of all the Orders :', this.allOrders);
     });
   }
@@ -37,27 +39,43 @@ export class StaffComponent implements OnInit {
     );
   }
 
-  changeStatus(status: string, id: number) {
-    console.log(status, id);
-    this.staffService.updateOrderStatus(status, id).subscribe((r) => {
-      console.log(r);
-      this.response = r;
-      if (!this.response.error) {
-        alert('Order status updated to: ' + status);
-        if (this.response.data.status == 'delivered') {
-          this.deliveredTime = this.response.data.orderDeliveryTime;
-          console.log(this.deliveredTime);
+  getDateTime(time: number):string {
+    const date = new Date(time);
+     const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  };
 
-          window.location.reload();
-        }
-      } else {
-        alert("Couldn't update status. Try again later! ");
-      }
-    });
+    return date.toLocaleString('en-US', options);
+  }
+  changeStatus(status: string, id: number) {
+    // console.log(status, id);
+    // this.staffService.updateOrderStatus(status, id).subscribe((r) => {
+    //   console.log(r);
+    //   this.response = r;
+    //   if (!this.response.error) {
+    //     alert('Order status updated to: ' + status);
+    //     if (this.response.data.status == 'delivered') {
+    //       this.deliveredTime = this.response.data.orderDeliveryTime;
+    //       console.log(this.deliveredTime);
+
+    //       window.location.reload();
+    //     }
+    //   } else {
+    //     alert("Couldn't update status. Try again later! ");
+    //   }
+    // });
   }
 
   deleteFoodOrder(orderID: number) {
-    window.alert('Are you sure you want to delete the order?');
+    let result = confirm('Are you sure you want to delete the order?');
+    if (result == false) {
+      return;
+    }
     console.log('delete btn clicked.Id:' + orderID);
     this.staffService.deleteFoodOrder(orderID).subscribe((response) => {
       console.log(response);

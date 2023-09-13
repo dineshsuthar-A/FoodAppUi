@@ -16,44 +16,49 @@ export class StaffServiceService {
     return this.http.delete(environment.apiUrl+"user/userid/"+id);
   }
 
-//Order Status for Staff Conponent Start
-updateOrderStatus(status: String, id: number){
-  return this.http.put(`http://localhost:8080/foodOrder/${id}`,status)
-}
+  //Order Status for Staff Conponent Start
+  updateOrderStatus(status: String, id: number){
+    return this.http.put(`http://localhost:8080/foodOrder/${id}`,status)
+  }
 
-deleteFoodOrder(value: number) {
-  return this.http.delete(`http://localhost:8080/foodorder/${value}`);
-}
+  deleteFoodOrder(value: number) {
+    return this.http.delete(`${environment.apiUrl}foodorder/delete?orderid=${value}`);
+  }
 
-//End
+  //End
 
-//ITEM SERVICES START
+  //ITEM SERVICES START
 
-getItem(foodOrderId: Number){
-  return this.http.get(`http://localhost:8080/item/${foodOrderId}`);
-}
+  getItem(foodOrderId: Number){
+    return this.http.get(`http://localhost:8080/item/${foodOrderId}`);
+  }
 
-getOrderById(value: number) {
-  return this.http.get(`http://localhost:8080/foodorderbyid/${value}`);
-}
+  getOrderById(value: number) {
+    return this.http.get(`http://localhost:8080/foodorderbyid/${value}`);
+  }
 
-saveFoodProduct(formData: any) {
-  return this.http.post(environment.apiUrl + "foodproduct/save",
-    formData);
-}
+  saveFoodProduct(formData: any) {
+    return this.http.post(environment.apiUrl + "foodproduct/save",
+      formData);
+  }
 
-//ITEM SERVICES END
+  //ITEM SERVICES END
 
 
-//EDIT ORDER SERVICE START
+  //EDIT ORDER SERVICE START
 
-getAllFoodOrder(value: number) {
-  return this.http.get(`http://localhost:8080/foodorder/${value}`);
-}
+  getAllFoodOrder(id: number) {
+    return this.http.get(`${environment.apiUrl}foodorder/getall?userid=${id}`);
+  }
 
-updateStatus(foodOrder:any){
-  return this.http.put("http://localhost:8080/foodorder",foodOrder)
-}
+  updateStatus(foodOrder:any){
+    return this.http.put("http://localhost:8080/foodorder",foodOrder)
+  }
 
+  makeFoodOrder(id:any, order:any) {
+    return this.http.post(environment.apiUrl + "foodorder/order?staffId=" + id, order);
+  }
+
+ 
 //EDIT ORDER SERVICE END
 }

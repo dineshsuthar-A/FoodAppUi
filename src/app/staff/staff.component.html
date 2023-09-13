@@ -1,114 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Staff</title>
     <!-- <link rel="stylesheet" type="text/css" href="staff.component.css"/> -->
-</head>
-<body>
-    <div class="registerPage" 
-        style=" width: 100%; height: 150vh; background: rgb(255, 254, 254); background-position: center;
-        background-repeat: no-repeat; background-size: cover;">
-    <div class="jumbotron"
-        style="padding: 10px; background: linear-gradient(rgba(80, 154, 192, 0.8), rgba(73, 150, 178, 0.8)),
-        url(../../assets/img/back.jpg); background-size: cover; height: 30vh; background-repeat: no-repeat; color: white;
-        text-align: center;">
-    
-    <div class="jumbotron-text" style="margin-top: 20px; font-size: x-large">
-      <h2>
-        {{ staff.name }}<br>
-        {{ staff.email }}<br>
-      </h2>
-      <br><br>
-      <button
-        type="button" class="btn btn-danger btn-lg btn-block"
-        style="width: 60%" (click)="logout()"> Logout Of the Account
-      </button><br><br>
-    </div>
+  </head>
+  <body>
+    <div
+      class="registerPage"
+      style="
+        width: 100%;
+        height: 150vh;
+        background: rgb(255, 254, 254);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      "
+    >
+      <div
+        class="jumbotron"
+        style="
+          padding: 10px;
+          background: linear-gradient(
+            rgba(80, 154, 192, 0.8),
+            rgba(73, 150, 178, 0.8)
+          );
+          background-size: cover;
+          height: 30vh;
+          background-repeat: no-repeat;
+          color: white;
+          text-align: center;
+        "
+      >
+        <div
+          class="jumbotron-text"
+          style="margin-top: 20px; font-size: x-large"
+        >
+          <h2>
+            {{ staff.name }}<br />
+            {{ staff.email }}<br />
+          </h2>
+          <br /><br />
+          <button
+            type="button"
+            class="btn btn-danger btn-lg btn-block"
+            style="width: 60%"
+            (click)="logout()"
+          >
+            Logout Of the Account</button
+          ><br /><br />
+        </div>
 
-    <div class="container">
-      <div class="orders" style="margin-top: 30px">
-        
-        <button
-          type="button" class="btn btn-info btn-block" 
-          [routerLink]="['/create-order']" style="width: 60%; font-size: large; margin-bottom: 20px">Create New Food Order
-        </button>
-        <div class="input-group">
-          <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search for a particular Order  (According to Customer Name)"
-            aria-label="Search"
-            aria-describedby="search-addon"
-            [(ngModel)]="searchOrder"
-            (input)="filterOrders()"
-          />
-        </div><br><br>
+        <div class="container">
+          <div class="orders" style="margin-top: 30px">
+            <button
+              type="button"
+              class="btn btn-info btn-block"
+              [routerLink]="['/create-order']"
+              style="width: 60%; font-size: large; margin-bottom: 20px"
+            >
+              Create New Food Order
+            </button>
+            <div class="input-group">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search for a particular Order  (According to Customer Name)"
+                aria-label="Search"
+                aria-describedby="search-addon"
+                [(ngModel)]="searchOrder"
+                (input)="filterOrders()"
+              />
+            </div>
+            <br /><br />
 
-        <div class="row row-cols-1 row-cols-md-4 g-2">
-          <!-- <div class="col" *ngFor="let fo of allOrders.data | filter: searchOrder"> -->
-            <div class="col" *ngFor="let fo of filteredOrders">
-            <div class="card">
-              <div class="card-body" style="color: black">
-                <img
-                  src="../../assets/img/order.jpg"
-                  class="card-img-top"
-                  alt="Error Loading Image"
-                  height="300px"
-                />
-                <h5 class="card-title">Order ID : {{ fo.id }}</h5>
-                <h6>Name of the Customer : {{ fo.customerName }}</h6>
-                <h6>Contact Number : {{ fo.contactNumber }}</h6>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  Total Amount of the Order : {{ fo.totalPrice }}
-                </li>
-                <li class="list-group-item">
-                  Created At : {{ fo.orderCreatedTime }}
-                </li>
-                <li class="list-group-item">
-                  Delivered At : {{ fo.orderDeliveryTime }}
-                </li>
-                <div class="card-footer text-success" style="text-align: center; font-size: xx-large">
-                  <select
-                    class="form-control"
-                    id="inputSelect"
-                    name="status"
-                    [(ngModel)]="fo.status"
-                    (ngModelChange)="changeStatus($event, fo.id)"
-                    [disabled]="fo.status === delivered"
-                  >
-                    <option value="confirmed">Confirmed</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="process">In Process</option>
-                  </select>
+            <div class="row row-cols-1 row-cols-md-4 g-2">
+              <!-- <div class="col" *ngFor="let fo of allOrders.data | filter: searchOrder"> -->
+              <div class="col" *ngFor="let fo of filteredOrders">
+                <div class="card">
+                  <div class="card-body" style="color: black">
+                    <h5 class="card-title">Order ID : {{ fo.id }}</h5>
+                    <h6>Name of the Customer : {{ fo.customerName }}</h6>
+                    <h6>Contact Number : {{ fo.contactNumber }}</h6>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      Total Amount of the Order : {{ fo.totalPrice }}
+                    </li>
+                    <li class="list-group-item">
+                      Created At : {{ getDateTime(fo.orderCreatedTime) }}
+                    </li>
+                    <li *ngIf="fo.orderDeliveryTime" class="list-group-item">
+                      Delivered At : {{ fo.orderDeliveryTime }}
+                    </li>
+                    <div
+                      class="card-footer text-success"
+                      style="text-align: center; font-size: xx-large"
+                    >
+                      <select
+                        class="form-control"
+                        id="inputSelect"
+                        name="status"
+                        [(ngModel)]="fo.status"
+                        (ngModelChange)="changeStatus($event, fo.id)"
+                        [disabled]="fo.status === delivered"
+                      >
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="process">In Process</option>
+                      </select>
+                    </div>
+                  </ul>
+
+                  <div class="card-body text-center">
+                    <button
+                      class="btn btn-warning"
+                      style="width: 200px"
+                      [routerLink]="['/bill/', fo.id]"
+                    >
+                      View Bill</button
+                    ><br /><br />
+
+                    <button
+                      class="btn btn-info"
+                      style="width: 200px"
+                      [routerLink]="['/edit-order/', fo.id]"
+                      [disabled]="fo.status === delivered"
+                    >
+                      Edit the Order</button
+                    ><br /><br />
+
+                    <button
+                      class="btn btn-danger"
+                      style="width: 200px"
+                      (click)="deleteFoodOrder(fo.id)"
+                    >
+                      Delete the Order
+                    </button>
+                  </div>
                 </div>
-              </ul>
-
-              <div class="card-body text-center">
-                <button class="btn btn-warning" style="width: 200px"
-                  [routerLink]="['/bill/', fo.id]"> View Bill
-                </button><br><br>
-                
-                <button class="btn btn-info" style="width: 200px"
-                  [routerLink]="['/edit-order/', fo.id]"
-                  [disabled]="fo.status === delivered"> Edit the Order
-                </button><br><br>
-                
-                <button class="btn btn-danger" style="width: 200px"
-                  (click)="deleteFoodOrder(fo.id)"> Delete the Order
-                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-    
-</body>
+  </body>
 </html>

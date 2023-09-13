@@ -17,12 +17,15 @@ export class CreateOrderComponent implements OnInit {
   foodOrderId!: Number;
   orderItems: any;
   totalOrderPrice: number = 0;
+  items: any[]
 
   constructor(
     private fPservice: ManagerServicesService,
-    private fOService: StaffServiceService,
+    private staffService: StaffServiceService,
     private route: Router
-    ) { }
+  ) {
+    this.items = [];
+  }
 
   allFoodProducts: any;
   reply: any;
@@ -36,7 +39,6 @@ export class CreateOrderComponent implements OnInit {
       console.log('Number of Food Products : ', cnt);
       if (cnt == 0) {
         window.alert('No Food Products Available! \nPlease Contact Manager');
-        this.route.navigate(['/staff']);
       } else {
         let finalFoodProds = this.allFoodProducts.data;
         finalFoodProds = finalFoodProds.filter(function (v: {
@@ -81,36 +83,40 @@ export class CreateOrderComponent implements OnInit {
 
   addNewOrder(form: NgForm) {
     const newDate = new Date();
+    console.log(this.itemCountMap);
+    this.items = [];
+    this.itemCountMap.forEach((value, key) => {
+      
+      
+      this.allFoodProducts.forEach((element:any) => {
+        if (key == element?.id) {
+          let data = { id:0, productId: key, name: element?.name, type: element?.type, price: element?.price, quantity: value };
+          this.items.push(data);
+        }
+      });
+     
+    });
     let newOrder = {
-      status: 'confirmed',
+      status: 'Confirmed',
       customerName: form.value.customerName,
       contactNumber: form.value.contactNumber,
       totalPrice: this.totalOrderPrice,
       orderCreatedTime: newDate,
+      items: this.items,
+      user: this.staff
     };
     console.log('Staff id: ' + this.staff.id);
     console.log('New Order Made : ', newOrder);
+    const id = this.staff.id;
     this.reply = confirm('Do you want to place the order? ');
-    // if (this.reply == true) {
-    //   this.fOService.saveFoodProduct(this.staff.id, newOrder).subscribe((r) => {
-    //     console.log('Placed Order : ' + newOrder);
-    //     this.res = r;
-    //     this.foodOrderId = this.res.data.id;
-    //     console.log(this.res.message);
-
-    //     if (!this.res.error) {
-    //       alert('Food Order made successfully!');
-    //       this.itemCountMap.forEach((value, key) => {
-    //         let data = { id: key, quantity: value };
-    //         this.item.saveItem(data, this.foodOrderId).subscribe((p) => {
-    //           console.log(p);
-    //         });
-    //       });
-
-    //       this.route.navigate(['/staff']);
-    //     }
-    //   });
-    // }
+    if (this.reply == true) {
+      this.staffService.makeFoodOrder(id, newOrder).subscribe((res) => {
+        console.log(res);
+        this.route.navigate(['/staff']);
+      }, (error) => {
+        alert("Server Error");
+      });
+    }
   }
   
   resetTotalPrice() {

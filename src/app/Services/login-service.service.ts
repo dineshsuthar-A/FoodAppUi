@@ -10,7 +10,7 @@ export class LoginServiceService {
   constructor(private http: HttpClient) { }
   
   loginUser(email:any, password:any) {
-    return this.http.post(environment.apiUrl + "/user/login", {
+    return this.http.post(environment.apiUrl + "user/login", {
       "email": email,
       "password" : password
     })
