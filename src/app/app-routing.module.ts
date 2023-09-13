@@ -7,6 +7,7 @@ import { StaffComponent } from './staff/staff.component';
 import { AuthGuardGuard } from './Guards/auth-guard.guard';
 import { FoodProductComponent } from './food-product/food-product.component';
 import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
+import { CreateOrderComponent } from './create-order/create-order.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate:[AuthGuardGuard] },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'staff', component: StaffComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardGuard] },
   { path: 'foodproduct', component: FoodProductComponent },
-  { path:'addfoodproduct', component:AddFoodProductComponent}
+  { path:'addfoodproduct', component:AddFoodProductComponent},
+  { path: 'create-order', component: CreateOrderComponent }
 ];
 
 @NgModule({
