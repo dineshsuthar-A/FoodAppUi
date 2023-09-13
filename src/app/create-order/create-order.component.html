@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order</title>
+</head>
+<body>
+    <div class="registerPage" 
+        style=" width: 100%; height: 200vh; background: linear-gradient(rgba(219, 204, 154, 0.8), rgba(219, 204, 154, 0.8)),
+        url(../../assets/img/createOrderBack.jpg); 
+        background-position: center; background-repeat: no-repeat; background-size: cover;"><br><br>
+     <div class="container" style=" background: linear-gradient(rgba(53, 132, 163, 0.5), rgba(67, 154, 179, 0.5));
+      padding-bottom: 20px; padding-top: 20px;  color: white; margin-left: 5%; width: fit-content;">
+      <!-- width: fit-content; -->
+
+    <div style="text-align: center" class="container">
+      <h1>Create a new Order!!!</h1>
+      <img src="../../assets/img/img2.jpg" alt="Logo can't be loaded" height="300px" style="border-radius: 25%;"/>
+    </div>
+    <div class="container">
+      
+        <form #newOrder="ngForm" (ngSubmit)="addNewOrder(newOrder)" style="font-size: large;">
+            <label for="inputEmail" class="sr-only">Enter Name</label>
+            <input name="customerName" #customerName="ngModel" ngModel type="name" id="inputEmail" class="form-control" placeholder="Full Name" required/>
+            <span *ngIf="customerName.invalid && customerName.touched" style="color: red">Name required</span><br/>
+            <label for="inputPassword" class="sr-only">Enter Contact Number</label>
+            <input name="contactNumber" #contactNumber="ngModel" ngModel type="tel" id="inputPassword" class="form-control"  placeholder="Contact Number" required/>
+            <span *ngIf="contactNumber.invalid && contactNumber.touched" style="color: red">Contact required</span ><br/>
+
+            <p style="margin: 1px 0">Choose From Menu:</p>
+            <div class="list-group foodproduct" *ngFor="let f of allFoodProducts">
+            <a class="list-group-item list-group-item-action" style="margin: 1px auto">
+            
+            <div class="d-flex w-100 justify-content-between" style="font-size: large;">
+              <p class="mb-1">{{ f.name }}</p>
+              <p class="mb-1">{{ f.type }}</p>
+              <small> &#8377; {{ f.price }}</small>
+              <div>
+                <button type="button" class="quantity-inp"
+                  (click)="addNewItem(f.id, f.price)"> +
+                </button>
+                <button type="button">
+                  {{
+                    this.itemCountMap.get(f.id)
+                      ? this.itemCountMap.get(f.id)
+                      : 0
+                  }}
+                </button>
+                <button type="button" class="quantity-inp"
+                  (click)="removeItem(f.id, f.price)"> -
+                </button>
+              </div>
+            </div>
+
+            </a>
+            </div>
+            <h2 style="margin-top: 10px; margin-left: 1000px"> Total price: 
+            <span id="totalPriceValue">{{ totalOrderPrice }}</span>
+            </h2><br/>
+            <button class="btn btn-lg btn-success btn-block" type="submit" style="width: 100%"> Make the Order!</button>
+        
+        </form>
+    </div>
+  </div>
+</div>
+
+    
+</body>
+</html>
