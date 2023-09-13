@@ -11,7 +11,6 @@ export class FoodProductComponent implements OnInit {
 
   FoodProductList: any
   
-
   constructor(private service: ManagerServicesService) { 
     this.service.getFoodProducts().subscribe((res: any) => {
       this.FoodProductList = res?.data;
@@ -19,6 +18,34 @@ export class FoodProductComponent implements OnInit {
       alert("Server error");
     });
   }
+
+  changeAvailability(id: any, data: any) {
+    data.availability = !data.availability;
+    this.service.updateProduct(id, data).subscribe((res: any) => {
+      console.log(res);
+
+    }, (err: any) => {
+      alert("server Error");
+    })
+  }
+
+  getFoodProduct() {
+    this.service.getFoodProducts().subscribe((res: any) => {
+      this.FoodProductList = res?.data;
+    }, (error: any) => {
+      alert("Server error");
+    });
+  }
+
+  deleteFoodProduct(id: any) {
+    this.service.deleteFoodProduct(id).subscribe((res: any) => {
+      alert("Product Deleted");
+      this.getFoodProduct();
+    }, (error) => {
+      console.log("Server Error");
+    })
+  }
+
 
   ngOnInit(): void {
   }

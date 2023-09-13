@@ -26,10 +26,21 @@ export class ManagerServicesService {
     });
     
   }
+  updateStaff(id: any, formData: any) {
+    return this.http.put(environment.apiUrl + "user/update?userId=" + id, formData);
+  }
+  deleteFoodProduct(id: any) {
+    return this.http.delete(environment.apiUrl + "foodproduct/product/" + id);
+  }
+  updateProduct(id:any, formData:any) {
+    return this.http.put(environment.apiUrl + "foodproduct/update?foodId="+id,
+      formData);
+  }
 
   getFoodProducts() {
     return this.http.get(environment.apiUrl + "foodproduct/getall");
   }
+
   saveFoodProduct(formData: any) {
     return this.http.post(environment.apiUrl + "foodproduct/save",
       formData);
@@ -37,5 +48,9 @@ export class ManagerServicesService {
 
   getStaff(id:any) {
     return this.http.get(environment.apiUrl + "user/find?userId=" + id);
+  }
+
+  getProduct(id: any) {
+    return this.http.get(environment.apiUrl + "/foodproduct/find?foodId=" + id);
   }
 }

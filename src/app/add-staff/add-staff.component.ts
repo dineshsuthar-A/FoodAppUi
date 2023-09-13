@@ -13,9 +13,10 @@ export class AddStaffComponent implements OnInit {
 
  
   registrationForm: FormGroup;
+Type:string
 
-
-  constructor(private fb: FormBuilder, private service : ManagerServicesService, private route:Router, private url:ActivatedRoute) {
+  constructor(private fb: FormBuilder, private service: ManagerServicesService, private route: Router, private url: ActivatedRoute) {
+    this.Type = "Register"
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -30,6 +31,7 @@ export class AddStaffComponent implements OnInit {
     const id = params.get('id');
     
       if (id) {
+        this.Type = "Update"
         this.service.getStaff(id).subscribe((res:any) => {
           console.log(res);
           this.registrationForm = this.fb.group({
@@ -55,14 +57,26 @@ export class AddStaffComponent implements OnInit {
   }
 
   onSubmit() {
+    
     if (this.registrationForm.valid) {
       const formData = this.registrationForm?.value;
-      this.service.registerStaff(formData).subscribe(res => {
-        alert("Staff Member created");
-        this.registrationForm.reset();
-      }, err => {
-        alert("Server Error");
-      })
+      if (this.Type === "Update") {
+        this.service.updateStaff(this.url.snapshot.paramMap.get('id'), formData).subscribe(res => {
+          console.log(res);
+          alert("Updated");
+        }, err => {
+          alert("Server Error");
+        });
+      } else {
+        this.service.registerStaff(formData).subscribe(res => {
+          alert("Staff Member created");
+          this.registrationForm.reset();
+        }, err => {
+          alert("Server Error");
+        });
+      }
+
+    
     } else {
       // Form is invalid, do not submit and show error messages
       alert('Please correct the form errors');

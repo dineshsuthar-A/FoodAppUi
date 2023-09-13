@@ -42,6 +42,7 @@
                   type="checkbox"
                   role="switch"
                   [checked]="d.availability"
+                  (click)="changeAvailability(d.id, d)"
                   id="flexSwitchCheckDefault"
                 />
               </div>
@@ -52,11 +53,16 @@
                   type="button"
                   style="margin-right: 10px"
                   class="btn btn-success"
-                  [routerLink]="['/edit']"
+                  [routerLink]="['/editproduct', d?.id]"
                 >
                   Edit
                 </button>
-                <button type="button" class="btn btn-danger" id="liveToastBtn">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  id="liveToastBtn"
+                  (click)="deleteFoodProduct(d?.id)"
+                >
                   Delete
                 </button>
               </div>
