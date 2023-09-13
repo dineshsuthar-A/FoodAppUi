@@ -11,6 +11,9 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
 import { FoodProductComponent } from './food-product/food-product.component';
 import { NavManagerComponent } from './nav-manager/nav-manager.component';
 import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
+import { BillComponent } from './bill/bill.component';
+import { CreateOrderComponent } from './create-order/create-order.component';
+import { EditOrderComponent } from './edit-order/edit-order.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { AddFoodProductComponent } from './add-food-product/add-food-product.com
     AddStaffComponent,
     FoodProductComponent,
     NavManagerComponent,
-    AddFoodProductComponent
+    AddFoodProductComponent,
+    BillComponent,
+    CreateOrderComponent,
+    EditOrderComponent
   ],
   imports: [
     BrowserModule,
