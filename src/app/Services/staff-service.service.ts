@@ -16,6 +16,16 @@ export class StaffServiceService {
     return this.http.delete(environment.apiUrl+"user/userid/"+id);
   }
 
+//Order Status for Staff Conponent Start
+updateOrderStatus(status: String, id: number){
+  return this.http.put(`http://localhost:8080/foodOrder/${id}`,status)
+}
+
+deleteFoodOrder(value: number) {
+  return this.http.delete(`http://localhost:8080/foodorder/${value}`);
+}
+
+//End
 
 //ITEM SERVICES START
 
