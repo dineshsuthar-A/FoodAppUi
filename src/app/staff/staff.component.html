@@ -1,111 +1,120 @@
 <div class="registerPage">
-      <div class="jumbotron">
-        <div class="jumbotron-text">
-          <span class="staff-details">
-          <p><b>
-            {{staff.name | uppercase}}<br>
-            {{staff.email | uppercase}}</b>
-          </p></span>
-          <button type="button" class="btn btn-danger" (click)="logout()">
-            Logout</button>
-        </div> 
+  <div class="jumbotron">
+    <div class="jumbotron-text">
+      <span class="staff-details">
+        <p>
+          <b>
+            {{ staff.name | uppercase }}<br />
+            {{ staff.email | uppercase }}</b
+          >
+        </p></span
+      >
+      <button type="button" class="btn btn-danger" (click)="logout()">
+        Logout
+      </button>
+    </div>
 
-        <div class="container">
-          <div class="orders" style="margin-top: 30px">
-            <button
-              type="button"
-              class="btn btn-primary create-order-btn"
-              [routerLink]="['/create-order']"
-            >
-              Create New Food Order
-            </button>
-            <div class="input-group">
-              <input
-                type="search"
-                class="form-control rounded"
-                placeholder="Search for a particular Order  (According to Customer Name)"
-                aria-label="Search"
-                aria-describedby="search-addon"
-                [(ngModel)]="searchOrder"
-                (input)="filterOrders()"
-              />
-            </div>
-            <br /><br />
-            <div class="row row-cols-1 row-cols-md-4 g-2">
-              <!-- <div class="col" *ngFor="let fo of allOrders.data | filter: searchOrder"> -->
-              <div class="col" *ngFor="let fo of filteredOrders">
-                <div class="card">
-                  <div class="card-body" style="color: black">
-                    <h5 class="card-title">Order ID : {{ fo.id }}</h5>
-                    <h6>Name of the Customer : <b>{{ fo.customerName | uppercase}}</b></h6>
-                    <h6>Contact Number : <b>{{ fo.contactNumber }}</b></h6>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      Total Amount of the Order : <br /><b>{{ fo.totalPrice }}</b>
-                    </li>
-                    <li class="list-group-item">
-                      Created At :<br />
-                      {{ getDateTime(fo.orderCreatedTime) }}
-                    </li>
-                    <li *ngIf="fo.orderDeliveryTime" class="list-group-item">
-                      Delivered At :<br />
-                      <b>{{ getDateTime(fo.orderDeliveryTime) }}</b>
-                    </li>
-                    <li *ngIf="!fo.orderDeliveryTime" class="list-group-item">
-                      Delivered At :<br /><b>
-                      Not Deliverd Yet</b>
-                    </li>
-
-                    <div
-                      class="card-footer text-success"
-                      style="text-align: center; font-size: xx-large"
-                    >
-                      <select
-                        class="form-control"
-                        id="inputSelect"
-                        name="status"
-                        [(ngModel)]="fo.status"
-                        (ngModelChange)="changeStatus($event, fo)"
-                        [disabled]="fo.status === delivered"
-                      >
-                        <option value="confirmed">Confirmed</option>
-                        <option value="delivered">Delivered</option>
-                        <option value="process">In Process</option>
-                      </select>
-                    </div>
-                  </ul>
-
-                  <div class="card-body text-center">
-                    <button
-                      class="btn btn-warning"
-                      style="width: 200px"
-                      [routerLink]="['/bill', fo.id]"
-                    >
-                      View Bill</button
-                    ><br /><br />
-
-                    <button
-                      class="btn btn-info"
-                      style="width: 200px"
-                      [routerLink]="['/edit-order/', fo.id]"
-                      [disabled]="fo.status === delivered"
-                    >
-                      Edit the Order</button
-                    ><br /><br />
-
-                    <button
-                      class="btn btn-danger"
-                      style="width: 200px"
-                      (click)="deleteFoodOrder(fo.id)"
-                    >
-                      Delete the Order
-                    </button>
-                  </div>
-                </div>
+    <div class="container">
+      <div class="orders" style="margin-top: 30px">
+        <button
+          type="button"
+          class="btn btn-primary create-order-btn"
+          [routerLink]="['/create-order']"
+        >
+          Create New Food Order
+        </button>
+        <div class="input-group">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search for a particular Order  (According to Customer Name)"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            [(ngModel)]="searchOrder"
+            (input)="filterOrders()"
+          />
+        </div>
+        <br /><br />
+        <div class="row row-cols-1 row-cols-md-4 g-2">
+          <!-- <div class="col" *ngFor="let fo of allOrders.data | filter: searchOrder"> -->
+          <div class="col" *ngFor="let fo of filteredOrders">
+            <div class="card">
+              <div class="card-body" style="color: black">
+                <h5 class="card-title">Order ID : {{ fo.id }}</h5>
+                <h6>
+                  Name of the Customer :
+                  <b>{{ fo.customerName | uppercase }}</b>
+                </h6>
+                <h6>
+                  Contact Number : <b>{{ fo.contactNumber }}</b>
+                </h6>
               </div>
-            </div><br /><br />
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  Total Amount of the Order : <br /><b>{{ fo.totalPrice }}</b>
+                </li>
+                <li class="list-group-item">
+                  Created At :<br />
+                  <b> {{ getDateTime(fo.orderCreatedTime) }}</b>
+                </li>
+                <li *ngIf="fo.orderDeliveryTime" class="list-group-item">
+                  Delivered At :<br />
+                  <b>{{ getDateTime(fo.orderDeliveryTime) }}</b>
+                </li>
+                <li *ngIf="!fo.orderDeliveryTime" class="list-group-item">
+                  Delivered At :<br /><b> Not Delivered Yet</b>
+                </li>
+
+                <div
+                  class="card-footer text-success"
+                  style="text-align: center; font-size: xx-large"
+                >
+                  <select
+                    class="form-control"
+                    id="inputSelect"
+                    name="status"
+                    [(ngModel)]="fo.status"
+                    (ngModelChange)="changeStatus($event, fo)"
+                    [disabled]="fo.status === delivered"
+                  >
+                    <option value="confirmed">Confirmed</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="process">In Process</option>
+                  </select>
+                </div>
+              </ul>
+
+              <div class="card-body text-center">
+                <button
+                  class="btn btn-warning"
+                  style="width: 200px"
+                  [routerLink]="['/bill', fo.id]"
+                >
+                  View Bill</button
+                ><br /><br />
+
+                <button
+                  class="btn btn-info"
+                  style="width: 200px"
+                  [routerLink]="['/edit-order/', fo.id]"
+                  [disabled]="fo.status === delivered"
+                >
+                  Edit the Order</button
+                ><br /><br />
+
+                <button
+                  class="btn btn-danger"
+                  style="width: 200px"
+                  (click)="deleteFoodOrder(fo.id)"
+                >
+                  Delete the Order
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+        <br /><br />
       </div>
     </div>
+  </div>
+</div>

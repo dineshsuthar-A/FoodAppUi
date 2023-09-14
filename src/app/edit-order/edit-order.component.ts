@@ -34,6 +34,7 @@ export class EditOrderComponent implements OnInit {
       for (let i of data?.data?.items) {
         this.itemCountMap.set(i.productId, i.quantity);
       }
+      this.totalOrderPrice = this.selectedProduct?.totalPrice;
     });
 
     this.manager.getFoodProducts().subscribe((res: any) => {
@@ -92,6 +93,7 @@ export class EditOrderComponent implements OnInit {
     this.reply = confirm('Do you want to update the order? ');
     this.staffServe.updateOrder(updateOrder).subscribe((res) => { 
       console.log(res);
+      this.router.navigate(['/staff'])
     });
   }
 

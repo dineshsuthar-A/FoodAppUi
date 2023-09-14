@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="selectedProduct">
   <H3>Update Food Order!!</H3>
   <hr />
   <div class="regForm">
@@ -6,86 +6,88 @@
       <div class="col-6">
         <form #orderToUpdate="ngForm" (ngSubmit)="updateOrder(orderToUpdate)">
           <!-- Name Field -->
-           <label for="inputEmail" class="sr-only">Update Customer Name</label>
-        <input
-          name="customerName"
-          #customerName="ngModel"
-          ngModel
-          type="name"
-          id="inputEmail"
-          class="form-control"
-          [(ngModel)]="selectedProduct.customerName"
-          required
-        />
-        <span
-          *ngIf="customerName.invalid && customerName.touched"
-          style="color: red"
-          >Name required</span
-        ><br />
-        <label for="inputPassword" class="sr-only">Update Customer Contact Number</label>
-        <input
-          name="contactNumber"
-          #contactNumber="ngModel"
-          ngModel
-          type="tel"
-          id="inputPassword"
-          class="form-control"
-          [(ngModel)]="selectedProduct.contactNumber"
-          required
-        />
-        <span
-          *ngIf="contactNumber.invalid && contactNumber.touched"
-          style="color: red"
-          >Contact required</span
-        ><br />
-        <p style="margin: 1px 0">Choose From Menu:</p>
-        <div class="list-group foodproduct" *ngFor="let f of allItems">
-          <a
-            class="list-group-item list-group-item-action"
-            style="margin: 1px auto"
+          <label for="inputEmail" class="sr-only">Update Customer Name</label>
+          <input
+            name="customerName"
+            #customerName="ngModel"
+            ngModel
+            type="name"
+            id="inputEmail"
+            class="form-control"
+            [(ngModel)]="selectedProduct.customerName"
+            required
+          />
+          <span
+            *ngIf="customerName.invalid && customerName.touched"
+            style="color: red"
+            >Name required</span
+          ><br />
+          <label for="inputPassword" class="sr-only"
+            >Update Customer Contact Number</label
           >
-            <div class="d-flex w-100 justify-content-between">
-              <p class="mb-1">{{ f.name }}</p>
-              <p class="mb-1">{{ f.type }}</p>
-              <small> &#8377; {{ f.price }}</small>
-              <div>
-                <button
-                  type="button"
-                  class="quantity-inp"
-                  (click)="addNewItem(f.id, f.price)"
-                >
-                  +
-                </button>
-                <button type="button">
-                  {{
-                    this.itemCountMap.get(f.id)
-                      ? this.itemCountMap.get(f.id)
-                      : 0
-                  }}
-                </button>
-                <button
-                  type="button"
-                  class="quantity-inp"
-                  (click)="removeItem(f.id, f.price)"
-                >
-                  -
-                </button>
+          <input
+            name="contactNumber"
+            #contactNumber="ngModel"
+            ngModel
+            type="tel"
+            id="inputPassword"
+            class="form-control"
+            [(ngModel)]="selectedProduct.contactNumber"
+            required
+          />
+          <span
+            *ngIf="contactNumber.invalid && contactNumber.touched"
+            style="color: red"
+            >Contact required</span
+          ><br />
+          <p style="margin: 1px 0">Choose From Menu:</p>
+          <div class="list-group foodproduct" *ngFor="let f of allItems">
+            <a
+              class="list-group-item list-group-item-action"
+              style="margin: 1px auto"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <p class="mb-1">{{ f.name }}</p>
+                <p class="mb-1">{{ f.type }}</p>
+                <small> &#8377; {{ f.price }}</small>
+                <div>
+                  <button
+                    type="button"
+                    class="quantity-inp"
+                    (click)="addNewItem(f.id, f.price)"
+                  >
+                    +
+                  </button>
+                  <button type="button">
+                    {{
+                      this.itemCountMap.get(f.id)
+                        ? this.itemCountMap.get(f.id)
+                        : 0
+                    }}
+                  </button>
+                  <button
+                    type="button"
+                    class="quantity-inp"
+                    (click)="removeItem(f.id, f.price)"
+                  >
+                    -
+                  </button>
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
-        <h2 style="margin-top: 10px; display: flex; justify-content: right;">
-          Total price: <span id="totalPriceValue">{{ totalOrderPrice }}</span>
-        </h2>
-        <br />
-        <button
-          class="btn btn-lg btn-success btn-block"
-          type="submit"
-          style="width: 100%"
-        >
-          Update the Order!
-        </button>
-        <br /><br />
+            </a>
+          </div>
+          <h2 style="margin-top: 10px; display: flex; justify-content: right">
+            Total price: <span id="totalPriceValue">{{ totalOrderPrice }}</span>
+          </h2>
+          <br />
+          <button
+            class="btn btn-lg btn-success btn-block"
+            type="submit"
+            style="width: 100%"
+          >
+            Update the Order!
+          </button>
+          <br /><br />
         </form>
       </div>
     </div>

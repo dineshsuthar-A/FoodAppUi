@@ -1,4 +1,5 @@
 <div
+  *ngIf="orderDetails"
   class="card"
   style="
     width: fit-content;
@@ -19,8 +20,8 @@
           height="150px"
           style="border-radius: 50%"
         /> -->
-        <h3>Thank you for Choosing Our App!</h3>
-        <h5>Here is your Invoice!</h5>
+        <h3>Food Invoice</h3>
+        <h5>Thank You</h5>
       </div>
       <p><b>Customer Name:</b><br />{{ orderDetails?.customerName }}</p>
       <p><b>Contact Number:</b><br />{{ orderDetails?.contactNumber }}</p>

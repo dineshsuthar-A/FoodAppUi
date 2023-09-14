@@ -33,6 +33,14 @@ export class StaffComponent implements OnInit {
     });
   }
 
+  getOrderData(): any{
+    this.staffService.getAllFoodOrder(this.staff.id).subscribe((data) => {
+      this.allOrders = data;
+      this.filteredOrders = this.allOrders?.data;
+      console.log('List of all the Orders :', this.allOrders);
+    });
+  }
+
   filterOrders() {
     this.filteredOrders = this.allOrders.data.filter((order:any) => 
       order.customerName.toLowerCase().includes(this.searchOrder.toLowerCase())
@@ -57,15 +65,7 @@ export class StaffComponent implements OnInit {
     order.status = status;
     this.staffService.updateOrder(order).subscribe((r) => {
       console.log(r);
-      this.response = r;
-      if (!this.response.error) {
-        alert('Order status updated to: ' + status);
-        if (this.response.data.status == 'delivered') {
-          this.deliveredTime = this.response.data.orderDeliveryTime;
-        }
-      } else {
-        alert("Couldn't update status. Try again later! ");
-      }
+      this.getOrderData();
     });
   }
 
@@ -80,6 +80,7 @@ export class StaffComponent implements OnInit {
       this.staffService.getAllFoodOrder(this.staff.id).subscribe((data) => {
         this.allOrders = data;
         console.log(this.allOrders);
+        this.getOrderData();
       });
     });
   }
