@@ -1,64 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Staff</title>
-    <!-- <link rel="stylesheet" type="text/css" href="staff.component.css"/> -->
-  </head>
-  <body>
-    <div
-      class="registerPage"
-      style="
-        width: 100%;
-        height: 150vh;
-        background: rgb(255, 254, 254);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      "
-    >
-      <div
-        class="jumbotron"
-        style="
-          padding: 10px;
-          background: linear-gradient(
-            rgba(80, 154, 192, 0.8),
-            rgba(73, 150, 178, 0.8)
-          );
-          background-size: cover;
-          height: 30vh;
-          background-repeat: no-repeat;
-          color: white;
-          text-align: center;
-        "
-      >
-        <div
-          class="jumbotron-text"
-          style="margin-top: 20px; font-size: x-large"
-        >
-          <h2>
-            {{ staff.name }}<br />
-            {{ staff.email }}<br />
-          </h2>
-          <br /><br />
-          <button
-            type="button"
-            class="btn btn-danger btn-lg btn-block"
-            style="width: 60%"
-            (click)="logout()"
-          >
-            Logout Of the Account</button
-          ><br /><br />
-        </div>
+<div class="registerPage">
+      <div class="jumbotron">
+        <div class="jumbotron-text">
+          <span class="staff-details">
+          <p>
+            {{staff.name}}<br>
+            {{staff.email}}
+          </p></span>
+          <button type="button" class="btn btn-danger" (click)="logout()">
+            Logout</button>
+        </div> 
 
         <div class="container">
           <div class="orders" style="margin-top: 30px">
             <button
               type="button"
-              class="btn btn-info btn-block"
+              class="btn btn-primary create-order-btn"
               [routerLink]="['/create-order']"
-              style="width: 60%; font-size: large; margin-bottom: 20px"
             >
               Create New Food Order
             </button>
@@ -74,7 +31,6 @@
               />
             </div>
             <br /><br />
-
             <div class="row row-cols-1 row-cols-md-4 g-2">
               <!-- <div class="col" *ngFor="let fo of allOrders.data | filter: searchOrder"> -->
               <div class="col" *ngFor="let fo of filteredOrders">
@@ -153,5 +109,3 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
