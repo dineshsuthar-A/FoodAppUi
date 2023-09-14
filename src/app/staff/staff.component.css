@@ -1,0 +1,47 @@
+.registerPage{
+    width: 100%;
+    height: 150vh;
+    background: rgb(255, 254, 254);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.jumbotron{
+    background-color: rgb(67, 157, 236);
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 80px;
+}
+.jumbotron-text{
+    font-size: medium;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+.staff-details{
+    margin-top: 9px;
+    margin-left: 10px;
+    background-color: white;
+    width: 200px;
+    height: 60px;
+    border-radius: 5px;
+}
+.jumbotron-text button{
+    margin-top: 18px;
+    margin-right: 10px;
+    width: 80px;
+    height: 40px;
+}
+.container{
+    margin-top: 50px;
+    padding-top: 5px;
+    border-radius: 5px;
+    background-color: rgb(82, 219, 219);
+}
+.create-order-btn{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
