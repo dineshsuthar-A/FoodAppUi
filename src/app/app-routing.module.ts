@@ -10,20 +10,22 @@ import { AddFoodProductComponent } from './add-food-product/add-food-product.com
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { BillComponent } from './bill/bill.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
+import { ManagerGuardGuard } from './Guards/manager-guard.guard';
+import { StaffGuardGuard } from './Guards/staff-guard.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate:[AuthGuardGuard] },
-  { path:'manager', component:BranchManagerDashboardComponent},
-  { path: 'addStaff', component: AddStaffComponent },
-  { path: 'edit/:id', component: AddStaffComponent },
-  { path: 'staff', component: StaffComponent },
+  { path:'manager', component:BranchManagerDashboardComponent, canActivate:[ManagerGuardGuard]},
+  { path: 'addStaff', component: AddStaffComponent, canActivate:[ManagerGuardGuard] },
+  { path: 'edit/:id', component: AddStaffComponent, canActivate:[ManagerGuardGuard] },
+  { path: 'staff', component: StaffComponent, canActivate:[StaffGuardGuard] },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuardGuard] },
-  { path: 'foodproduct', component: FoodProductComponent },
-  { path: 'addfoodproduct', component: AddFoodProductComponent },
-  { path:'editproduct/:id', component:AddFoodProductComponent},
-  { path: 'create-order', component: CreateOrderComponent },
-  { path: 'bill/:id', component: BillComponent },
-  { path: 'edit-order/:id', component:EditOrderComponent}
+  { path: 'foodproduct', component: FoodProductComponent, canActivate:[ManagerGuardGuard] },
+  { path: 'addfoodproduct', component: AddFoodProductComponent, canActivate:[ManagerGuardGuard] },
+  { path:'editproduct/:id', component:AddFoodProductComponent, canActivate:[StaffGuardGuard] },
+  { path: 'create-order', component: CreateOrderComponent, canActivate:[StaffGuardGuard]  },
+  { path: 'bill/:id', component: BillComponent, canActivate:[StaffGuardGuard]  },
+  { path: 'edit-order/:id', component:EditOrderComponent, canActivate:[StaffGuardGuard] }
 ];
 
 @NgModule({
