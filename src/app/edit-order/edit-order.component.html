@@ -1,41 +1,12 @@
-<div
-  *ngIf="selectedProduct"
-  class="registerPage"
-  style="
-    width: 100%;
-    height: 200vh;
-    background: linear-gradient(
-      rgba(219, 204, 154, 0.8),
-      rgba(219, 204, 154, 0.8)
-    );
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  "
->
-  <br /><br />
-
-  <div
-    class="container"
-    style="
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-      padding-bottom: 20px;
-      padding-top: 20px;
-      width: fit-content;
-      color: white;
-    "
-  >
-    <div style="margin: 2% auto; text-align: center" class="container">
-      <h1>Update the Food Order!!!</h1>
-      <!-- <img
-        src="../../assets/img/updateOrder.jpg"
-        alt="Logo can't be loaded"
-        height="300px"
-      /> -->
-    </div>
-    <div style="margin: 2% auto" class="container">
-      <form #orderToUpdate="ngForm" (ngSubmit)="updateOrder(orderToUpdate)">
-        <label for="inputEmail" class="sr-only">Update name</label>
+<div class="container">
+  <H3>Update Food Order!!</H3>
+  <hr />
+  <div class="regForm">
+    <div class="row">
+      <div class="col-6">
+        <form #orderToUpdate="ngForm" (ngSubmit)="updateOrder(orderToUpdate)">
+          <!-- Name Field -->
+           <label for="inputEmail" class="sr-only">Update Customer Name</label>
         <input
           name="customerName"
           #customerName="ngModel"
@@ -51,7 +22,7 @@
           style="color: red"
           >Name required</span
         ><br />
-        <label for="inputPassword" class="sr-only">Update Contact Number</label>
+        <label for="inputPassword" class="sr-only">Update Customer Contact Number</label>
         <input
           name="contactNumber"
           #contactNumber="ngModel"
@@ -67,7 +38,6 @@
           style="color: red"
           >Contact required</span
         ><br />
-
         <p style="margin: 1px 0">Choose From Menu:</p>
         <div class="list-group foodproduct" *ngFor="let f of allItems">
           <a
@@ -104,10 +74,9 @@
             </div>
           </a>
         </div>
-        <h2 style="margin-top: 10px; margin-left: 1050px">
+        <h2 style="margin-top: 10px; display: flex; justify-content: right;">
           Total price: <span id="totalPriceValue">{{ totalOrderPrice }}</span>
         </h2>
-
         <br />
         <button
           class="btn btn-lg btn-success btn-block"
@@ -117,7 +86,8 @@
           Update the Order!
         </button>
         <br /><br />
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

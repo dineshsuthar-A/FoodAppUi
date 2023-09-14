@@ -7,7 +7,7 @@
     background-size: cover;
 }
 .jumbotron{
-    background-color: rgb(67, 157, 236);
+    background-color: rgb(177, 171, 171);
     background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
@@ -23,7 +23,7 @@
     margin-top: 9px;
     margin-left: 10px;
     background-color: white;
-    width: 200px;
+    width: 250px;
     height: 60px;
     border-radius: 5px;
 }
@@ -37,7 +37,7 @@
     margin-top: 50px;
     padding-top: 5px;
     border-radius: 5px;
-    background-color: rgb(82, 219, 219);
+    background-color: rgb(177, 171, 171);
 }
 .create-order-btn{
     display: flex;

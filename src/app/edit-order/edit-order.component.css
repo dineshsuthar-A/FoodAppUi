@@ -1,0 +1,19 @@
+.row{
+    display: flex;
+    justify-content: center;
+}
+.container h3{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+.regForm
+{
+    padding: 15px;
+    background-color: rgb(177, 171, 171);
+    border-radius: 5px
+    
+}
+.menu-section{
+    margin-right: 200px;
+}

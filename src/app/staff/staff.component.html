@@ -2,9 +2,9 @@
       <div class="jumbotron">
         <div class="jumbotron-text">
           <span class="staff-details">
-          <p>
-            {{staff.name}}<br>
-            {{staff.email}}
+          <p><b>
+            {{staff.name | uppercase}}<br>
+            {{staff.email | uppercase}}</b>
           </p></span>
           <button type="button" class="btn btn-danger" (click)="logout()">
             Logout</button>
@@ -37,12 +37,12 @@
                 <div class="card">
                   <div class="card-body" style="color: black">
                     <h5 class="card-title">Order ID : {{ fo.id }}</h5>
-                    <h6>Name of the Customer : {{ fo.customerName }}</h6>
-                    <h6>Contact Number : {{ fo.contactNumber }}</h6>
+                    <h6>Name of the Customer : <b>{{ fo.customerName | uppercase}}</b></h6>
+                    <h6>Contact Number : <b>{{ fo.contactNumber }}</b></h6>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                      Total Amount of the Order : <br />{{ fo.totalPrice }}
+                      Total Amount of the Order : <br /><b>{{ fo.totalPrice }}</b>
                     </li>
                     <li class="list-group-item">
                       Created At :<br />
@@ -50,11 +50,11 @@
                     </li>
                     <li *ngIf="fo.orderDeliveryTime" class="list-group-item">
                       Delivered At :<br />
-                      {{ getDateTime(fo.orderDeliveryTime) }}
+                      <b>{{ getDateTime(fo.orderDeliveryTime) }}</b>
                     </li>
                     <li *ngIf="!fo.orderDeliveryTime" class="list-group-item">
-                      Delivered At :<br />
-                      Not Deliverd Yet
+                      Delivered At :<br /><b>
+                      Not Deliverd Yet</b>
                     </li>
 
                     <div
@@ -104,7 +104,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div><br /><br />
           </div>
         </div>
       </div>
