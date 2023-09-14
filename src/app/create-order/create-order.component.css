@@ -1,0 +1,24 @@
+.form-section{
+    display: flex;
+    justify-content: center;
+    margin-left: -150px;
+}
+.container h3{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+.regForm{
+    padding: 15px;
+    background-color: rgb(177, 171, 171);
+    border-radius: 5px;
+    width: 100%;
+}
+.list-group{
+    width: 800px;
+    display: flex;
+    justify-content: center;
+}
+.form-control{
+    width: 800px;
+}
