@@ -86,16 +86,14 @@ export class CreateOrderComponent implements OnInit {
     console.log(this.itemCountMap);
     this.items = [];
     this.itemCountMap.forEach((value, key) => {
-      
-      
       this.allFoodProducts.forEach((element:any) => {
         if (key == element?.id) {
           let data = { id:0, productId: key, name: element?.name, type: element?.type, price: element?.price, quantity: value };
           this.items.push(data);
         }
       });
-     
     });
+    
     let newOrder = {
       status: 'confirmed',
       customerName: form.value.customerName,
