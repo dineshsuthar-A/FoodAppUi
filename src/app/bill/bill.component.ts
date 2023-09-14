@@ -10,22 +10,15 @@ import { StaffServiceService } from '../Services/staff-service.service';
 export class BillComponent implements OnInit {
 
   orderDetails: any;
-  result: any;
+  items: any;
 
   constructor(private route: ActivatedRoute, private staff: StaffServiceService) { }
 
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
-    console.log(id);
-
-    this.staff.getOrderById(id).subscribe((data) => {
-      this.orderDetails = data;
-      console.log(this.orderDetails);
-    });
-
-    this.staff.getItem(id).subscribe((data) => {
-      this.result = data;
-      console.log(this.result);
+    this.staff.getOrderById(id).subscribe((data:any) => {
+      this.orderDetails = data?.data;
+      this.items = data?.data?.items;
     });
   }
 

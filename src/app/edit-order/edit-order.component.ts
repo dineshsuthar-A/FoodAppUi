@@ -18,7 +18,6 @@ export class EditOrderComponent implements OnInit {
   itemCountMap = new Map<number, number>();
   staff = JSON.parse(localStorage.getItem("user")!);
   allItems : any;
-  allFoodOrders: any;
   reply: any;
 
   constructor(private staffServe : StaffServiceService, private router : Router, private route:ActivatedRoute) { }
@@ -26,34 +25,15 @@ export class EditOrderComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
-
-    this.staffServe.getAllFoodOrder(this.staff.id).subscribe((data) => {
-      this.allFoodOrders = data;
-      console.log('List of all the Orders :', this.allFoodOrders);
-
-      for(let r of this.allFoodOrders.data){
-        console.log(r);
-        
-        if(r.id==this.id){
-          this.selectedProduct=r;
-          this.totalOrderPrice = r.totalPrice;
-                    
-          break;
-        }
+  
+    this.staffServe.getOrderById(this.id).subscribe((data: any) => {
+      console.log(data);
+      
+      this.selectedProduct = data?.data;
+      for (let i of data?.data?.items) {
+        this.itemCountMap.set(i.id, i.quantity);
       }
     });
-   
-     this.staffServe.getItem(this.id).subscribe((data)=>{
-       this.allItems=data;
-       console.log(this.allItems.data);
-       for(let i of this.allItems.data){
-        this.itemCountMap.set(i.id,i.quantity);
-       }
-       console.log(this.itemCountMap);
-       
-     })
-
   }
 
   addNewItem(itemId: any, itemPrice: any) {
@@ -91,23 +71,9 @@ export class EditOrderComponent implements OnInit {
     console.log('Staff id: ' + this.staff.id);
     console.log('Food Order Update : ', updateOrder);
     this.reply = confirm('Do you want to update the order? ');
-    // if (this.reply == true) {
-    //   this.staffServe.updateStatus(updateOrder).subscribe((r) => {
-    //     this.res = r;
-    //     console.log(this.res.message);
-    //     if (!this.res.error) {
-    //       alert('Food Order Updated successfully!');
-    //       this.itemCountMap.forEach((value, key) => {
-    //         let data={"id":key,"quantity":value};
-    //         this.item.editItem(data).subscribe((p)=>{
-    //           console.log(p);
-    //         })
-    //     });
-    //       this.router.navigate(['/staff']);
-    //     }
-    //   });
-      
-    // }
+    this.staffServe.updateOrder(updateOrder).subscribe((res) => { 
+      console.log(res);
+    });
   }
 
   resetTotalPrice() {

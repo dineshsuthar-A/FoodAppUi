@@ -86,14 +86,21 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                      Total Amount of the Order : {{ fo.totalPrice }}
+                      Total Amount of the Order : <br />{{ fo.totalPrice }}
                     </li>
                     <li class="list-group-item">
-                      Created At : {{ getDateTime(fo.orderCreatedTime) }}
+                      Created At :<br />
+                      {{ getDateTime(fo.orderCreatedTime) }}
                     </li>
                     <li *ngIf="fo.orderDeliveryTime" class="list-group-item">
-                      Delivered At : {{ fo.orderDeliveryTime }}
+                      Delivered At :<br />
+                      {{ getDateTime(fo.orderDeliveryTime) }}
                     </li>
+                    <li *ngIf="!fo.orderDeliveryTime" class="list-group-item">
+                      Delivered At :<br />
+                      Not Deliverd Yet
+                    </li>
+
                     <div
                       class="card-footer text-success"
                       style="text-align: center; font-size: xx-large"
@@ -117,7 +124,7 @@
                     <button
                       class="btn btn-warning"
                       style="width: 200px"
-                      [routerLink]="['/bill/', fo.id]"
+                      [routerLink]="['/bill', fo.id]"
                     >
                       View Bill</button
                     ><br /><br />

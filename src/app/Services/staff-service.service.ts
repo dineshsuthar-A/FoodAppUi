@@ -29,12 +29,10 @@ export class StaffServiceService {
 
   //ITEM SERVICES START
 
-  getItem(foodOrderId: Number){
-    return this.http.get(`http://localhost:8080/item/${foodOrderId}`);
-  }
+
 
   getOrderById(value: number) {
-    return this.http.get(`http://localhost:8080/foodorderbyid/${value}`);
+    return this.http.get(`${environment.apiUrl}foodorder/foodorderbyid?orderId=${value}`);
   }
 
   saveFoodProduct(formData: any) {

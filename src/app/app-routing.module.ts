@@ -8,6 +8,8 @@ import { AuthGuardGuard } from './Guards/auth-guard.guard';
 import { FoodProductComponent } from './food-product/food-product.component';
 import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
+import { BillComponent } from './bill/bill.component';
+import { EditOrderComponent } from './edit-order/edit-order.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate:[AuthGuardGuard] },
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'foodproduct', component: FoodProductComponent },
   { path: 'addfoodproduct', component: AddFoodProductComponent },
   { path:'editproduct/:id', component:AddFoodProductComponent},
-  { path: 'create-order', component: CreateOrderComponent }
+  { path: 'create-order', component: CreateOrderComponent },
+  { path: 'bill/:id', component: BillComponent },
+  { path: 'edit-order/:id', component:EditOrderComponent}
 ];
 
 @NgModule({
