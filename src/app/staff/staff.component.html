@@ -103,10 +103,10 @@
                         id="inputSelect"
                         name="status"
                         [(ngModel)]="fo.status"
-                        (ngModelChange)="changeStatus($event, fo.id)"
+                        (ngModelChange)="changeStatus($event, fo)"
                         [disabled]="fo.status === delivered"
                       >
-                        <option value="Confirmed">Confirmed</option>
+                        <option value="confirmed">Confirmed</option>
                         <option value="delivered">Delivered</option>
                         <option value="process">In Process</option>
                       </select>

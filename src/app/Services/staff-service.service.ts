@@ -17,12 +17,12 @@ export class StaffServiceService {
   }
 
   //Order Status for Staff Conponent Start
-  updateOrderStatus(status: String, id: number){
-    return this.http.put(`http://localhost:8080/foodOrder/${id}`,status)
+  updateOrder(order:any){
+    return this.http.put(`${environment.apiUrl}foodorder/update`, order)
   }
 
-  deleteFoodOrder(value: number) {
-    return this.http.delete(`${environment.apiUrl}foodorder/delete?orderid=${value}`);
+  deleteFoodOrder(value: number, userid:any) {
+    return this.http.delete(`${environment.apiUrl}foodorder/delete?orderId=${value}&userId=${userid}`);
   }
 
   //End
@@ -59,6 +59,4 @@ export class StaffServiceService {
     return this.http.post(environment.apiUrl + "foodorder/order?staffId=" + id, order);
   }
 
- 
-//EDIT ORDER SERVICE END
 }

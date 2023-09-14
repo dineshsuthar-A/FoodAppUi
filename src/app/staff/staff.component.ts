@@ -52,23 +52,21 @@ export class StaffComponent implements OnInit {
 
     return date.toLocaleString('en-US', options);
   }
-  changeStatus(status: string, id: number) {
-    // console.log(status, id);
-    // this.staffService.updateOrderStatus(status, id).subscribe((r) => {
-    //   console.log(r);
-    //   this.response = r;
-    //   if (!this.response.error) {
-    //     alert('Order status updated to: ' + status);
-    //     if (this.response.data.status == 'delivered') {
-    //       this.deliveredTime = this.response.data.orderDeliveryTime;
-    //       console.log(this.deliveredTime);
-
-    //       window.location.reload();
-    //     }
-    //   } else {
-    //     alert("Couldn't update status. Try again later! ");
-    //   }
-    // });
+  changeStatus(status: string, order: any) {
+    console.log(status, order);
+    order.status = status;
+    this.staffService.updateOrder(order).subscribe((r) => {
+      console.log(r);
+      this.response = r;
+      if (!this.response.error) {
+        alert('Order status updated to: ' + status);
+        if (this.response.data.status == 'delivered') {
+          this.deliveredTime = this.response.data.orderDeliveryTime;
+        }
+      } else {
+        alert("Couldn't update status. Try again later! ");
+      }
+    });
   }
 
   deleteFoodOrder(orderID: number) {
@@ -76,8 +74,7 @@ export class StaffComponent implements OnInit {
     if (result == false) {
       return;
     }
-    console.log('delete btn clicked.Id:' + orderID);
-    this.staffService.deleteFoodOrder(orderID).subscribe((response) => {
+    this.staffService.deleteFoodOrder(orderID, this.staff?.id).subscribe((response) => {
       console.log(response);
       this.router.navigate(['staff']);
       this.staffService.getAllFoodOrder(this.staff.id).subscribe((data) => {

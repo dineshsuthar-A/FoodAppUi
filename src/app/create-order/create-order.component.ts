@@ -97,7 +97,7 @@ export class CreateOrderComponent implements OnInit {
      
     });
     let newOrder = {
-      status: 'Confirmed',
+      status: 'confirmed',
       customerName: form.value.customerName,
       contactNumber: form.value.contactNumber,
       totalPrice: this.totalOrderPrice,
